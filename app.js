@@ -10,7 +10,6 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 const passKey = process.env.PASS_KEY;
 const username = process.env.USER;
-console.log(apiKey);
 const saltRounds = 10;
 
 const app = express()
