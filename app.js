@@ -7,7 +7,6 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
-const PORT = process.env.PORT;
 const passKey = process.env.PASS_KEY;
 const username = process.env.USER;
 const saltRounds = 10;
@@ -237,12 +236,11 @@ app.post("/form",(req,res)=>{
 })
 
 
-app.listen(PORT||3000,(err)=>{
-    if(err)
-        console.log("err");
-    else
-        console.log("server started at port 3000");    
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () =>{
+    console.log(`server started at ${PORT}`)
 })
+
 
 
 
