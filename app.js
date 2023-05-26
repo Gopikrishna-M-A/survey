@@ -5,50 +5,46 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const nodemailer = require('nodemailer');
 require('dotenv').config();
-
-const passKey = process.env.PASS_KEY;
-const username = process.env.USER;
-const saltRounds = 10;
+var loggenIn = false
 
 const app = express()
-const URL = 'mongodb+srv://'+username+':'+passKey+'@survey.0ijfdji.mongodb.net/?retryWrites=true&w=majority'
+const PORT = process.env.PORT || 3000
+const passKey = process.env.PASS_KEY;
+const username = process.env.USER;
 
-mongoose.set("strictQuery", false);
-mongoose.connect(URL, { useNewUrlParser: true });
+
 
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs')  
 app.use(bodyParser.urlencoded({extended:false}))
-app.use(cookieParser());
-app.use(session({
-    secret: 'your secret key',
-    resave: false,
-    saveUninitialized: true
-  }));
 
 
 
-// user Collection
-
-const userSchema = mongoose.Schema(
-    {
-    name:String,
-    email:String,
-    password:String,
-    role:String,
-    phone:Number,
+//nodemailer
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'albinstanly2002@gmail.com',
+      pass: 'ibejfznampjowtlw'
     }
-)
-userSchema.set('timestamps', true);
+  });
+  
 
-const User = new mongoose.model('User',userSchema)
+//Mongoose
+const URL = "mongodb+srv://"+username+":"+passKey+"@survey.0ijfdji.mongodb.net/?retryWrites=true&w=majority"
+
+mongoose.set("strictQuery", false);
+mongoose.connect(URL, { useNewUrlParser: true });  
+
+
+
 
 //data Collection
 
 const dataSchema = mongoose.Schema(
     {
-    userId:mongoose.ObjectId,
     name:String,
     email:String,
     phone:Number,
@@ -62,31 +58,102 @@ dataSchema.set('timestamps', true);
 
 const Data = new mongoose.model('Data',dataSchema)
 
-    
 
 
 
 
-const isLoggedIn = (req, res, next) => {
-    if (req.cookies.loggedIn === 'true') {
-      next();
-    } else {
-      res.redirect("/login")
-    }
-}
+  
 
-
-// **************************************************************** routes ***************************************************************
-
-// route
 
 app.get("/",(req,res)=>{
-    res.redirect("/signup")
+    res.render("index")
 })
 
-app.get("/home",(req,res)=>{
-    if(req.session.user.role == "admin")
-    {
+
+
+app.get("/form",(req,res)=>{
+    res.render("form")
+})
+
+
+app.get("/blog",(req,res)=>{
+    res.render("503")
+})
+
+app.get("/careers",(req,res)=>{
+    res.render("career")
+})
+
+
+
+app.post("/contact",(req,res)=>{
+    
+    const { email, subject, message } = req.body
+
+    const mailOptions = {
+        from: email,
+        to: 'albin@xynapsetechnologies.com',
+        subject: subject+"  Email:"+email,
+        text: message
+    }
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+          res.redirect("/")
+        }
+      });
+})
+
+
+//login for data page
+
+app.get("/xynaps-confidential-login",(req,res)=>{
+    res.render("login")
+})
+
+app.get("/logout",(re1,res)=>{
+    loggenIn = false
+    res.redirect("/")
+})
+
+
+
+app.post("/login",(req,res)=>{
+
+    const { email, password } = req.body
+    if(email == "albinstanly2002@gmail.com" || email == "Albinstanly2002@gmail.com"){
+        if(password == "123"){
+            loggenIn = true
+            res.redirect("/student-data")
+        }else{
+            res.redirect("/login")
+        }
+    }else{
+        res.redirect("/login")
+    }
+
+})
+
+//check
+const requireRedirection = (req, res, next) => {
+    // Check if the desired condition is met
+    if (loggenIn) {
+      // Condition is met, allow access to the next route
+      next();
+    } else {
+      // Condition is not met, redirect to the desired route
+      res.redirect('/');
+    }
+  };
+
+// student-data
+
+
+app.get("/student-data",requireRedirection,(req,res)=>{
+
         Data.aggregate([
             {
               $group: {
@@ -109,95 +176,13 @@ app.get("/home",(req,res)=>{
             .catch((error) => {
               console.error('Error grouping data:', error);
             });
-  
-    }
-    else
-        res.render("form")
-
-})
-
-
-
-//logout route
-
-app.get('/logout', (req, res) => {
-    req.session.destroy((err) => {
-      if (err)
-        console.log(err)
-      else {
-        res.clearCookie('loggedIn');
-        res.redirect('/login');
-      }
-    });
-  });
-
-
-//login route
-
-app.get("/login",(req,res)=>{
-    res.render("login")
-})
-app.post("/login",(req,res)=>{
-    const email = req.body.email
-    const password = req.body.password
-
-    User.findOne({ email: email }).then((user) => {
-    if (!user) {
-      console.log('User not found')
-    } else {
-        const hash = user.password
-        bcrypt.compare(password, hash, function(err,result) {
-            if(result){
-                req.session.user = user;
-                // console.log(user.name);
-                res.cookie('loggedIn', 'true');
-                res.redirect("/home")
-            }
-            else    
-                res.send("password does not match")    
-        })
-    }
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-})
-
-
-
-
-//signup route
-
-app.get("/signup",(req,res)=>{
-    res.render("signup")
-})
-app.post("/signup",(req,res)=>{
-    const name =req.body.name
-    const email =req.body.email
-    const password =req.body.password
-    const role ="user"
-    const phone =req.body.phone
-
-    bcrypt.hash(password, saltRounds, function(err, result) {
-        if(!err){
-            const user = new User({
-                name:name,
-                email:email,
-                password:result,
-                role:role,
-                phone:phone,
-            })
-            user.save()
-            console.log("encrypting sucessfull ....");
-        }
-        else
-            console.log("err in encrypting password ....");
-       
     
-    });
+  
 
-   
-    res.redirect("/login")
+        
+  
+  
+
 })
 
 
@@ -211,13 +196,13 @@ app.post("/form",(req,res)=>{
     const role =req.body.role
     const stack =req.body.stack
     const message =req.body.msg
+    const phone ="1234567890"
 
 
     const newData = new Data({
-        userId: req.session.user._id,
         name: name,
         email: email,
-        phone: req.session.user.phone,
+        phone: phone,
         age: age,
         stack: stack,
         role: role,
@@ -227,21 +212,21 @@ app.post("/form",(req,res)=>{
       
       newData.save().then((createdData) => {
         console.log('Data created:', createdData)
-        res.redirect("/home")
+        res.render("success",{submission:true})
         })
         .catch((error) => {
-        console.error('Error creating data:', error);})
+        console.error('Error creating data:', error);
+        res.render("success",{submission:false})
+    })
 
 
 })
 
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () =>{
-    console.log(`server started at ${PORT}`)
+
+app.listen(PORT||3000,(err)=>{
+    if(err)
+        console.log("err");
+    else
+        console.log("server started ");    
 })
-
-
-
-
-// app.get("/faculty",isLoggedIn,(req,res)=>
