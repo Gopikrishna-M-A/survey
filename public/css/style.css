@@ -19,6 +19,9 @@
   --text-color-gray: rgb(139, 139, 139);
   --footer-links-color: #ffdc00;
 }
+.margin{
+  margin-top: 100px;
+}
 
 body {
   font-family: "Poppins", sans-serif;
