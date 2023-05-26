@@ -13,6 +13,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const passKey = process.env.PASS_KEY;
 const username = process.env.USER;
+const Epassword = process.env.PASSWORD;
 
 
 
@@ -125,7 +126,7 @@ app.post("/login",(req,res)=>{
 
     const { email, password } = req.body
     if(email == "albinstanly2002@gmail.com" || email == "Albinstanly2002@gmail.com"){
-        if(password == "123"){
+        if(password == Epassword){
             loggenIn = true
             res.redirect("/student-data")
         }else{
