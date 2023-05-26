@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+
+
+:root{
+    --bg: rgb(255, 255, 255);
+    --color: #171717; 
+    --border:#6F6F6F;
+    --fade:#6F6F6F;
+  }
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.team-wrapper{
+    padding: 3rem;
+    border-bottom: 1px solid var(--color);
+}
+.card{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--bg);
+    gap: 10px;
+    align-items: center;
+    border-radius: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+}
+.img-wrapper{
+    width: 7rem;
+    aspect-ratio: 1/1.5;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f7f7f7
+}
+
+.img-wrapper img{
+    width: 100%;
+    object-fit: cover;
+    transition: all .2s ease-in-out;
+}
+.img-wrapper img:hover{
+    transform: scale(1.1) rotate(5deg);
+}
+/* .card-cont{
+    display: flex;
+    flex-direction: column;
+    background-color: #6F6F6F;
+} */
+.card-name{
+ font-weight: 700;
+ color: var(--color);
+ font-size: 1.125rem;
+ line-height: 1.75rem;
+}
+.card-data{
+    color: #8e8e8e;
+}
+
+.card-desc{
+    text-align: center;
+    color: var(--fade);
+}
+.links-wrapper{
+    margin-top: 5px;
+    display:flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.card-tag{
+    color: #545454;
+    font-weight: bold;
+}
+.links-wrapper i {
+    color: #8e8e8e;
+    cursor: pointer;
+}
+.links-wrapper i:hover{
+    color: #242424;
+}
+.team-heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:4rem;
+}
+.team-title{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-family: 'Silver Streak regular';
+}
+.team-desc{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-family: 'Silver Streak regular';
+}
+.card-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.row{
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 10px;
+}
+
+@media (width<630px){
+    .card{
+        width: 100%;
+    }
+    .card-wrapper{
+        gap: 0px;
+    }
+}
