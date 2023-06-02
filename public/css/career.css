@@ -100,6 +100,7 @@ header {
   flex-direction: column;
   justify-content: center;
   gap: 40px;
+  margin-top: 10px;
 }
 
 .content-div {
@@ -312,4 +313,43 @@ button[type="submit"]:hover {
   .bi-plus-lg {
     font-size: 25px;
   }
+}
+
+
+/* ------------------------ */
+
+
+/* Medium */
+@media (width<992px) {
+  header {
+    margin-bottom: 70px;
+  }
+
+  .getStartBtn {
+    margin-left: 0px;
+    margin-top: 10px;
+  }
+}
+
+/* Small */
+@media (width<768px) {
+  
+}
+
+/* Extra small */
+@media (width<576px) {
+  header {
+    margin-bottom: 50px;
+  }
+
+  .navbar {
+    padding: 20px 0px 20px;
+  }
+  .navbar-brand {
+    font-size: 1rem;
+  }
+  #main-logo {
+    width: 60px;
+  }
+
 }
