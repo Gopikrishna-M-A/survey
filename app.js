@@ -193,7 +193,7 @@ app.get("/student-data",requireRedirection,(req,res)=>{
 
 //form 
 
-app.post("/form",upload.single('pdf'),(req,res)=>{
+app.post("/form",(req,res)=>{
     const name =req.body.name
     const email =req.body.email
     const age =req.body.age
