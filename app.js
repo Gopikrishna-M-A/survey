@@ -6,14 +6,22 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
+const multer = require('multer');
+const fs = require('fs-extra');
+const path = require('path');
+
 require('dotenv').config();
 var loggenIn = false
 
 const app = express()
+
 const PORT = process.env.PORT || 3000
 const passKey = process.env.PASS_KEY;
 const username = process.env.USER;
 const Epassword = process.env.PASSWORD;
+
+const upload = multer({ dest: 'uploads/' });
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 
@@ -35,6 +43,7 @@ const transporter = nodemailer.createTransport({
 
 //Mongoose
 const URL = "mongodb+srv://"+username+":"+passKey+"@survey.0ijfdji.mongodb.net/?retryWrites=true&w=majority"
+// const URL = "mongodb://localhost:27017/Survey"
 
 mongoose.set("strictQuery", false);
 mongoose.connect(URL, { useNewUrlParser: true });  
@@ -52,7 +61,11 @@ const dataSchema = mongoose.Schema(
     age:Number,
     stack:String,
     role:String,
-    comments:String
+    resume:String,
+    facebook:String,
+    twitter:String,
+    linkedin:String,
+    cover:String
     }
 )
 dataSchema.set('timestamps', true);
@@ -122,7 +135,7 @@ app.get("/logout",(re1,res)=>{
 
 
 
-app.post("/login",(req,res)=>{
+app.post("/xynaps-confidential-login",(req,res)=>{
 
     const { email, password } = req.body
     if(email == "albinstanly2002@gmail.com" || email == "Albinstanly2002@gmail.com"){
@@ -130,10 +143,10 @@ app.post("/login",(req,res)=>{
             loggenIn = true
             res.redirect("/student-data")
         }else{
-            res.redirect("/login")
+            res.redirect("/xynaps-confidential-login")
         }
     }else{
-        res.redirect("/login")
+        res.redirect("/xynaps-confidential-login")
     }
 
 })
@@ -177,12 +190,6 @@ app.get("/student-data",requireRedirection,(req,res)=>{
             .catch((error) => {
               console.error('Error grouping data:', error);
             });
-    
-  
-
-        
-  
-  
 
 })
 
@@ -190,24 +197,34 @@ app.get("/student-data",requireRedirection,(req,res)=>{
 
 //form 
 
-app.post("/form",(req,res)=>{
+app.post("/form",upload.single('pdf'),(req,res)=>{
     const name =req.body.name
     const email =req.body.email
     const age =req.body.age
     const role =req.body.role
+    const resume =req.body.resume
+    const facebook =req.body.fb
+    const twitter =req.body.Twitter
+    const linkedin =req.body.linkedin
     const stack =req.body.stack
-    const message =req.body.msg
-    const phone ="1234567890"
+    const cover =req.body.msg
+    const phone =req.body.Phone
+
+
 
 
     const newData = new Data({
-        name: name,
-        email: email,
-        phone: phone,
-        age: age,
-        stack: stack,
-        role: role,
-        comments: message
+        name,
+        email,
+        phone,
+        age,
+        stack,
+        role,
+        resume,
+        facebook,
+        twitter,
+        linkedin,
+        cover
       });
 
       
@@ -223,6 +240,10 @@ app.post("/form",(req,res)=>{
 
 })
 
+
+// app.all('*', (req, res, next) => {
+//   res.render("404")
+// });
 
 
 app.listen(PORT||3000,(err)=>{
