@@ -237,9 +237,9 @@ app.post("/form",(req,res)=>{
 })
 
 
-// app.all('*', (req, res, next) => {
-//   res.render("404")
-// });
+app.all('*', (req, res, next) => {
+  res.render("404")
+});
 
 
 app.listen(PORT||3000,(err)=>{
