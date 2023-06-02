@@ -6,9 +6,6 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
-const multer = require('multer');
-const fs = require('fs-extra');
-const path = require('path');
 
 require('dotenv').config();
 var loggenIn = false
@@ -20,8 +17,7 @@ const passKey = process.env.PASS_KEY;
 const username = process.env.USER;
 const Epassword = process.env.PASSWORD;
 
-const upload = multer({ dest: 'uploads/' });
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 
 
