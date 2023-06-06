@@ -19,7 +19,7 @@
   --text-color-gray: rgb(139, 139, 139);
   --footer-links-color: #ffdc00;
 }
-.margin{
+.margin {
   margin-top: 100px;
 }
 
@@ -75,10 +75,16 @@ body {
   align-items: center;
   text-decoration: none;
   width: 140px;
-  background-color: var(--primary-color);
-  color: var(--font-white);
-  margin-left: 30px;
-  padding: 8px 5px 8px;
+  /* get started btn with background fill */
+
+  /* background-color: var(--primary-color); */
+  /* color: var(--font-white); */
+
+  /* get started btn without background fill */
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  margin-left: 20px;
+  padding: 5px 5px 5px;
   border-radius: 6px;
   font-weight: 500;
 }
@@ -329,6 +335,8 @@ footer a {
 }
 .testimonial-section .hero-subheading {
   width: 100%;
+  font-size: large;
+  text-align: center;
 }
 @keyframes fadeIn {
   0% {

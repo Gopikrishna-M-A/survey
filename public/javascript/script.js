@@ -1,22 +1,22 @@
 // testimonial
 let testimonialColletion = [
   {
-    username: "Alan Walker",
-    designation: "Developer, Xynapse Tech",
+    username: " Rajesh Kumar",
+    designation: "CEO of ABC Painting Services",
     comment:
-      "tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Xynapse Technologies has been instrumental in taking our business to new heights. Their digital marketing strategies have significantly increased our online visibility, leading to a boost in customer engagement and sales. We highly recommend their services.",
   },
   {
-    username: "Kyle Zorro",
-    designation: "Developer, Xynapse Tech",
+    username: "Neha Sharma",
+    designation: "Owner of XYZ Painters",
     comment:
-      "tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "I am extremely satisfied with the web development services Xynapse Technologies provides. They created a stunning and user-friendly website for my painting business, which has greatly enhanced our online presence. Their team is highly professional and delivers exceptional results",
   },
   {
-    username: "Signen sati",
-    designation: "Developer, Xynapse Tech",
+    username: "Ankit Patel",
+    designation: " Marketing Manager at PaintPro India",
     comment:
-      "tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "The digital marketing expertise of Xynapse Technologies has helped us reach a wider audience and generate quality leads. Their team understands the nuances of the Indian market and has tailored their strategies accordingly. We have seen remarkable growth in our business thanks to their efforts",
   },
   {
     username: "Dimti Karlenkov",
