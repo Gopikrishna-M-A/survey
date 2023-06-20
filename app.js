@@ -87,7 +87,7 @@ app.get("/form",(req,res)=>{
 
 
 app.get("/blog",(req,res)=>{
-    res.render("503")
+    res.render("blog")
 })
 
 app.get("/careers",(req,res)=>{
