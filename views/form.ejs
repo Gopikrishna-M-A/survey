@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xynapse Technologies</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg" id="navbar">
+        <div class="container-fluid nav-container">
+          <div class="container-fluid nav-container">
+            <a class="navbar-brand" href="/">
+              <img src="./images/main-logo-yellow.png" alt="" id="main-logo" />
+              Xynapse Tech</a
+            >
+
+            <div>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-ul">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="/#project"
+                    >WORK</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/#services">SERVICES</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/#howitworks">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/blog">BLOG</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/careers">CAREER</a>
+                </li>
+                <li class="nav-item">
+                  <a class="getStartBtn" href="/#contact ">GET STARTED</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="cover">
+      <!-- <h1 id="title">Xynapse Technologies</h1>
+    <p id="description"><i>Thank you for taking the time to fill in this survey!</i></p> -->
+
+      <form id="survey-form" action="/form" method="post">
+        <fieldset>
+          <legend>Let us know about you!</legend>
+
+          <label id="name-label" for="name"
+            >Name:
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder=" Enter your name"
+              required
+            />
+          </label>
+
+          <label id="email-label" for="email"
+            >Email:
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder=" Enter your Email"
+              required
+            />
+          </label>
+
+          <label id="email-label" for="Phone"
+            >Phone:
+            <input
+              id="Phone"
+              name="Phone"
+              type="tel"
+              placeholder=" Enter your Phone Number"
+              required
+            />
+          </label>
+
+          <label id="number-label" for="age"
+            >Age (years):
+            <input
+              id="number"
+              name="age"
+              type="number"
+              placeholder=" Age"
+              min="5"
+              max="120"
+              required
+            />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Are you a teacher or a student?</legend>
+
+          <label id="student-label" for="role">
+            <input id="student" name="role" type="radio" value="student" />
+            Student
+          </label>
+
+          <label id="teacher-label" for="role">
+            <input id="teacher" name="role" type="radio" value="teacher" />
+            Teacher
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Area of Interest</legend>
+
+          <label id="content1-label" for="stack">
+            <input
+              id="content1"
+              name="stack"
+              type="radio"
+              value="Web development"
+            />
+            Web development
+          </label>
+
+          <label id="content2-label" for="stack">
+            <input
+              id="content2"
+              name="stack"
+              type="radio"
+              value="App development"
+            />
+            App development
+          </label>
+
+          <label id="content3-label" for="stack">
+            <input
+              id="content3"
+              name="stack"
+              type="radio"
+              value="Machine learning"
+            />
+            Machine learning
+          </label>
+
+          <label id="content4-label" for="stack">
+            <input
+              id="content4"
+              name="stack"
+              type="radio"
+              value="Cyber security"
+            />
+            Cyber security
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sharable Links</legend>
+          <label id="name-label" for="resume"
+            >Resume Link
+            <input
+              id="resume"
+              name="resume"
+              type="text"
+              placeholder="Link to your Resume"
+              required
+            />
+          </label>
+
+          <label id="name-label" for="fb"
+            >Facebook Link
+            <input
+              id="fb"
+              name="fb"
+              type="text"
+              placeholder="Link to your facebook account"
+            />
+          </label>
+
+          <label id="name-label" for="Twitter"
+            >Twitter Link:
+            <input
+              id="Twitter"
+              name="Twitter"
+              type="text"
+              placeholder="Link to your twitter account"
+            />
+          </label>
+
+          <label id="name-label" for="linkedin"
+            >LinkedIn Link:
+            <input
+              id="linkedin"
+              name="linkedin"
+              type="text"
+              placeholder="Link to your linkedIn account"
+            />
+          </label>
+        </fieldset>
+
+        <label id="else-label" for="msg"
+          >Cover Letter
+          <textarea
+            placeholder="I am interested in..."
+            id="else"
+            name="msg"
+            rows="5"
+            cols="30"
+          ></textarea>
+        </label>
+
+        <input class="mt-2" id="submit" type="submit" value="Submit" />
+      </form>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/javascript/navshadow.js"></script>
+  </body>
+</html>
