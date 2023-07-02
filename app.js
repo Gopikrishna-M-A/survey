@@ -71,51 +71,10 @@ const Data = new mongoose.model('Data',dataSchema)
 
 
 
-
-  
-
-
 app.get("/",(req,res)=>{
-    res.render("index")
+  res.render("form")
 })
 
-
-
-app.get("/form",(req,res)=>{
-    res.render("form")
-})
-
-
-app.get("/blog",(req,res)=>{
-    res.render("blog")
-})
-
-app.get("/careers",(req,res)=>{
-    res.render("career")
-})
-
-
-
-app.post("/contact",(req,res)=>{
-    
-    const { email, subject, message } = req.body
-
-    const mailOptions = {
-        from: email,
-        to: 'albin@xynapsetechnologies.com',
-        subject: subject+"  Email:"+email,
-        text: message
-    }
-
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-          res.redirect("/")
-        }
-      });
-})
 
 
 //login for data page
